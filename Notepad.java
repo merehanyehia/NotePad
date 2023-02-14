@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 import javafx.application.Application;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
@@ -42,6 +43,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToolBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
@@ -54,6 +56,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javax.imageio.ImageIO;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.ZoomEvent;
 
 /**
  *
@@ -76,23 +80,36 @@ public class Notepad extends Application {
     String path = "";
     String oldTxt = "";
     String newTxt = "";
-    MenuItem fitem = new MenuItem("new");
-    MenuItem fitem2 = new MenuItem("open");
-    MenuItem fitem3 = new MenuItem("save");
-    MenuItem fitem4 = new MenuItem("exit");
+    MenuItem fitem = new MenuItem("New");
+    MenuItem fitem2 = new MenuItem("Open");
+    MenuItem fitem3 = new MenuItem("Save");
+    MenuItem fitem4 = new MenuItem("Exit");
     TextArea area = new TextArea();
-    MenuItem eitem = new MenuItem("undo");
-    MenuItem eitem2 = new MenuItem("cut");
-    MenuItem eitem3 = new MenuItem("copy");
-    MenuItem eitem4 = new MenuItem("paste");
-    MenuItem eitem5 = new MenuItem("delete");
+    MenuItem eitem = new MenuItem("Undo");
+    MenuItem eitem2 = new MenuItem("Cut");
+    MenuItem eitem3 = new MenuItem("Copy");
+    MenuItem eitem4 = new MenuItem("Paste");
+    MenuItem eitem5 = new MenuItem("Delete");
 
-    MenuItem eitem6 = new MenuItem("select all");
+    MenuItem eitem6 = new MenuItem("Select All");
     MenuItem Hitem = new MenuItem("AboutNotePad");
+
 
     @Override
     public void init() throws Exception {
         super.init();
+        fitem.setAccelerator(KeyCombination.keyCombination("Ctrl+n"));
+        fitem2.setAccelerator(KeyCombination.keyCombination("Ctrl+o"));
+        fitem3.setAccelerator(KeyCombination.keyCombination("Ctrl+s"));
+        fitem4.setAccelerator(KeyCombination.keyCombination("Ctrl+e"));
+
+        eitem.setAccelerator(KeyCombination.keyCombination("Ctrl+u"));
+        eitem2.setAccelerator(KeyCombination.keyCombination("Ctrl+x"));
+        eitem3.setAccelerator(KeyCombination.keyCombination("Ctrl+c"));
+
+        eitem4.setAccelerator(KeyCombination.keyCombination("Ctrl+p"));
+        eitem5.setAccelerator(KeyCombination.keyCombination("Ctrl+d"));
+        eitem6.setAccelerator(KeyCombination.keyCombination("Ctrl+a"));
         area.setId("#root");
         MenuBar mbar = new MenuBar();
 
@@ -163,6 +180,8 @@ public class Notepad extends Application {
             }
 
         });
+
+        
         fitem3.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
